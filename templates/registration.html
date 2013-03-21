@@ -1,0 +1,36 @@
+<html>
+<h1>Register for Yipit Lunch</h1>
+
+<p style="color: red">{{ message }}</p>
+
+<form action="/lunch2/register_post/" method="post">
+	{% csrf_token %}
+
+	<label for="username">Username:</label>
+	<input type="text" name="username" id="username" value="" size="30" /><br />
+
+
+	<label for="email">Email:</label>
+	<input type="email" name="email" id="email" value="" size="30" /><br />
+
+	<label for="password">Password: </label>
+    <input type="password" name="password" id="password" value="" size="30" pattern=".{3,}"/><br />
+
+    <label for="password2">Password Again:</label>
+    <input type="password" name="password2" id="password2" value="" size="30" pattern=".{3,}"/><br />
+
+    <br />
+    <input type="submit" value="Register!" />
+</form>
+
+
+<style type="text/css">
+label {
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+
+</style>
+
+</html>

@@ -1,0 +1,13 @@
+<h2>All Meal Orders</h2>
+
+Return <a href="/lunch2/">home</a>
+
+{% if mealorder_list %}
+	<ul>
+	{% for mealorder in mealorder_list %}
+		<li><a href="/lunch2/mealorder/{{ mealorder.id }}/">{{ mealorder }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No mealorders are available.</p>
+{% endif %}

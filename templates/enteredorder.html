@@ -1,0 +1,23 @@
+<title>Order success!</title>
+
+<h3>Order entered successfully!</h3>
+
+{{ message }}
+{{ a }}
+
+<h5>Order details</h5>
+
+<p>Your order was for restaurant {{ mealorder.restaurant.name }} on date {{ mealorder.date }}.</p>
+
+Items:
+
+{% for item in poitems.items %}
+	<p>{{ item.1 }} of {{ item.0.itemtype.name }} - {{ item.0.name }} for ${{ item.0.price }}</p>
+{% endfor %}
+
+<p>Total price: ${{ personalorder.totalcost }}.</p>
+<p>Comments: {{ personalorder.comment }}</p>
+
+Return <a href="/lunch2/">home</a>
+<br />
+<a href="/lunch2/mealorder/{{ mealorder.id }}/summary/">Order summary</a>

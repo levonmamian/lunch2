@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title>Restaurant View</title>
+    Return <a href="/lunch2/">home</a>
+  </head>
+  <body>
+  	<h1>{{ restaurant.name }} Menu</h1>
+    <p>{{ restaurant.address }}</p>
+    <a href="{{ restaurant.website }}}">{{ restaurant.website }}</a>
+
+
+  	{% if error_message %}<p><strong>{{ error_message }}</strong></p>
+  	{% endif %}
+
+	{% for itemtype in restaurant.itemtype_set.all %}
+	<h2 style="margin-bottom:0">{{ itemtype.name }}</h2>
+	<p style="margin-top:0"><small>{{ itemtype.description }}</small><p>
+		{% for item in itemtype.item_set.all %}
+    	{{ item.name }} ---- ${{ item.price }}<br />
+    	{% endfor %}
+	{% endfor %}
+
+  </body>
+ </html>

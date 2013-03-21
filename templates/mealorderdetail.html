@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title>Open Meal Order</title>
+  	<h1> Meal Order </h1> 
+  	Return <a href="/lunch2/">home</a>
+  	<br />
+  	Go to order <a href="/lunch2/mealorder/{{ mealorder.id }}/summary/">summary</a>
+  	<p style="color: red">{{ message }}</p>
+
+  	<!--<script type="text/javascript" language="javascript">
+		function getTotal(oForm)
+		  {
+		  	var field, i = 0, total = 0, elements = oForm.elements;
+		  	alert('Length' + elements.length)
+		  	for (i; i < elements.length-4; i+=2)
+		  	{
+		  		field = elements[i];
+		  		field2 = elements[i+1]
+		  		if (field.value != '' && isNaN(field.value)
+		  		{
+		  			alert('Please enter a valid number here. Element ' + i)
+			  		field.focus();
+			  		field.select();
+			  		return '';
+			  	}
+			  	else if (field2.value != '' && isNaN(field2.value))
+			  		alert('Price not being found. Element ' + i)
+			  	else total += Number(field.value)*Number(field2.value);
+			}
+		  return ' ' + total;
+		  }
+	</script>-->
+
+  </head>
+  <body>
+  	<h2>Restaurant: {{ mealorder.restaurant.name }} </h2>
+  	<p>Order for date: {{ mealorder.date }}.</p>
+  	<p>To make sure you get what you want, submit your order by: {{ mealorder.time_deadline }}.</p>
+  	<p>The price limit for this order is ${{ mealorder.limit }}.</p>
+  	{% if error_message %}<p><strong>{{ error_message }}</strong></p>
+  	{% endif %}
+
+
+  	<form action="/lunch2/mealorder/{{ mealorder.id }}/enterorder/" method="post">
+		{% csrf_token %}
+		{% for itemtype in mealorder.restaurant.itemtype_set.all %}
+		<h3>{{ itemtype.name }}</h3>
+		<p style="margin-top:0"><small>{{ itemtype.description }}</small><p>
+			{% for item in itemtype.item_set.all %}
+	    	<input type="number" name="item{{ forloop.parentloop.counter }}{{ forloop.counter }}" id="item{{ forloop.parentloop.counter }}{{ forloop.counter }}" value="0" min="0" max="10"/>
+	    	<label for="item{{ forloop.parentloop.counter }}{{ forloop.counter }}">{{ item.name }}  $</label>
+	    	<input type="text" name="price{{ forloop.parentloop.counter }}{{ forloop.counter }}" id="price{{ forloop.parentloop.counter }}{{ forloop.counter }}" value="{{ item.price }}" readonly="readonly" size = "6" /><br />
+	    	{% endfor %}
+		{% endfor %}
+		<br />
+		<label for="comments">Comments:</label>
+		<textarea name="comment" value="" cols="50" rows="3"> </textarea>
+		<br />
+		<br />
+		<!--<input type="button" value="Get Order Total" onclick="total.value=javascript: return getTotal(this.form)" />
+		<input id="total" type="text" name="total" value="" readonly="readonly" /> -->
+		<br />
+		<br />
+		<input type="submit" value="Submit Your Order" />
+	</form>
+
+  </body>
+ </html>
