@@ -157,8 +157,7 @@ LOGGING = {
         },
         'console':{
             'level':'INFO',
-            'class':'logging.StreamHandler',
-            'strm': sys.stdout
+            'class':'logging.StreamHandler'
         }
     },
     'loggers': {
