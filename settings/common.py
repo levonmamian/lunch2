@@ -153,6 +153,11 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console':{
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'strm': sys.stdout
         }
     },
     'loggers': {
