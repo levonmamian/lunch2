@@ -158,8 +158,8 @@ LOGGING = {
         'console':{
             'level':'INFO',
             'class':'logging.StreamHandler'
-            'stream': sys.stdout
-        }
+            'stream': sys.stdout,
+        },
     },
     'loggers': {
         'django.request': {
