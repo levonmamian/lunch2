@@ -90,6 +90,36 @@ def register_post(request):
 	auth_login(request, user)
 	return redirect('/lunch2/')
 
+#Request to reset password
+def resetpassword(request):
+	return render_to_response('resetpassword.html', {}, context_instance=RequestContext(request))
+
+#Processing reset password request:
+def resetpassword_post(request):
+	message = ""
+	email = request.POST['email']
+	password = request.POST['password']
+	if isValidEmail(email):
+		message = "That is not a valid email. Please register."
+		return render_to_response('resetpassword.html', {'message': message }, context_instance=RequestContext(request))
+	if password != request.POST['password2']:
+		message = "Those passwords do not match. Please try again."
+		return render_to_response('resetpassword.html', {'message': message }, context_instance=RequestContext(request))
+	if request.user.is_authenticated() and email == request.user.email:
+		request.user.password = password
+		message = "Password reset successfully for existing user %s" % request.user.username
+		return render_to_response('resetpassword.html', {'message': message }, context_instance=RequestContext(request))
+	elif request.user.is_authenticated() and request.user.email != email:
+		message = "You are logged in with a different email address. Please either logout first or check the email address."
+		return render_to_response('resetpassword.html', {'message': message }, context_instance=RequestContext(request))
+	else:
+		user = User.objects.get(email = email)
+		user.password = password
+		user.backend='django.contrib.auth.backends.ModelBackend'
+		user.save()
+		auth_login(request, user)
+		message = "Password reset successfully! You are now logged in %s." % user.username
+	return render_to_response('resetpassword.html', {'message': message }, context_instance=RequestContext(request))
 
 #View for the stats on a past meal order
 def pastmealorder(request, mealorder_id):
@@ -97,9 +127,9 @@ def pastmealorder(request, mealorder_id):
 	if not m:
 		raise Http404
 	cost = m.totalCost()
-	p = m.relatedPersonalOrders()
-	itemdict = m.allItems()
-	d = {}
+	p = m.relatedPersonalOrders() #all personal orders that are part of this meal order
+	itemdict = m.allItems() #Dictionary from item in restaurant to total number of that item over all orders
+	d = {} # Dictionary from personalorder : { item : num of item }
 	for order in p:
 		d2 = {}
 		for item in order.items.all():

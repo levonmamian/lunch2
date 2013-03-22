@@ -16,7 +16,7 @@
     {% else %}
       You are not logged in. <a href="/lunch2/login/">Login now</a>.&nbsp;<a href="/lunch2/register/">Register now</a>.
     {% endif %}
-
+    <a href="/admin/">Administrator.</a>
     <style type="text/css">
       body {
         padding-top: 20px;
@@ -25,13 +25,13 @@
     </style>
   </head>
 
-  <body>
+  <body bgcolor="#B2ECFF">
     <div class="container">
 
       <div class="hero-unit">
         <h1>Hello, yipit team members!</h1>
 
-        <p>These are the open meal orders.</p>
+        <p>These are the open <a href="/lunch2/mealorder/">{{ "meal orders" }}</a>.</p>
           {% if open_mealorders %}
         		<ul>
         		{% for mealorder in open_mealorders %}

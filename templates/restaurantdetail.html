@@ -4,7 +4,7 @@
   	<title>Restaurant View</title>
     Return <a href="/lunch2/">home</a>
   </head>
-  <body>
+  <body bgcolor="#B2ECFF">
   	<h1>{{ restaurant.name }} Menu</h1>
     <p>{{ restaurant.address }}</p>
     <a href="{{ restaurant.website }}}">{{ restaurant.website }}</a>
@@ -20,6 +20,8 @@
     	{{ item.name }} ---- ${{ item.price }}<br />
     	{% endfor %}
 	{% endfor %}
-
+<br />
+<br />
+Return <a href="/lunch2/">home</a>
   </body>
  </html>

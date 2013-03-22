@@ -1,15 +1,17 @@
+<body bgcolor="#B2ECFF">
+
 {{ message }}
 <h2>Meal Order Summary</h2>
 Return <a href="/lunch2/">home</a>
 <h3>Order for {{ mealorder.restaurant.name }} on {{ mealorder.date }}</h3>
 Order deadline: {{ mealorder.time_deadline }}
 
-<p>Total Cost of Order: {{ cost }}</p>
+<p>Total Cost of Order: ${{ cost }}</p>
 
 <h4>Total Items</h4>
 
 {% for item in itemdict.items %}
-	{{ item.1 }} order of {{ item.0.itemtype.name }} - {{ item.0.name }}<br />
+	{{ item.1 }} order of {{ item.0.itemtype.name }} - {{ item.0.name }} --- {{ item.0.price }}<br />
 {% endfor %}
 
 <h4>Order by user</h4>
@@ -17,6 +19,8 @@ Order deadline: {{ mealorder.time_deadline }}
 {% for p in allpeople.items %}
 	<p>{{ p.0.user.username }}</p>
 	{% for item in p.1.items %}
-		{{ item.1 }} of {{ item.0.itemtype.name }} - {{ item.0.name }}<br />
+		{{ item.1 }} of {{ item.0.itemtype.name }} - {{ item.0.name }} --- {{ item.0.price }}<br />
 	{% endfor %}
+	Comments: {{ p.0.comment }}
 {% endfor %}
+</body>

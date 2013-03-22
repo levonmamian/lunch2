@@ -1,6 +1,4 @@
 # Django settings for your project.
-import dj_database_url
-import sys
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -20,10 +18,6 @@ DATABASES = {
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
-}
-
-DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite')
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -126,7 +120,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'gunicorn',
+    #'gunicorn',
     #'south',
     #'django_extensions',
     'lunch2',
@@ -155,11 +149,6 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
-        'console':{
-            'level':'INFO',
-            'class':'logging.StreamHandler',
-            'stream': sys.stdout,
-        },
     },
     'loggers': {
         'django.request': {
@@ -169,6 +158,3 @@ LOGGING = {
         },
     }
 }
-
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

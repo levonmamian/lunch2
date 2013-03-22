@@ -38,7 +38,7 @@ class MealOrder(models.Model):
 		return PersonalOrder.objects.filter(mealorder = self)
 
 	def allItems(self):
-		d = {}
+		d = {} #Dictionary from item in restaurant to total number of that item over all orders
 		p = self.relatedPersonalOrders()
 		for order in p:
 			for item in order.items.all():
