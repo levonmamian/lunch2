@@ -4,8 +4,6 @@
 <p style="color: red">{{ message }}</p>
 
 <form action="/lunch2/register_post/" method="post">
-	{% csrf_token %}
-
 	<label for="username">Username:</label>
 	<input type="text" name="username" id="username" value="" size="30" /><br />
 

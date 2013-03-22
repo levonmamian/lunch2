@@ -43,7 +43,6 @@
 
 
   	<form action="/lunch2/mealorder/{{ mealorder.id }}/enterorder/" method="post">
-		{% csrf_token %}
 		{% for itemtype in mealorder.restaurant.itemtype_set.all %}
 		<h3>{{ itemtype.name }}</h3>
 		<p style="margin-top:0"><small>{{ itemtype.description }}</small><p>
